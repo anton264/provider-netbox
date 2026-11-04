@@ -1,26 +1,126 @@
 name: Publish Provider Package
 
+# Builds the provider image and Crossplane package (.xpkg) for linux/amd64 and
+# linux/arm64 and pushes it to ghcr.io/<owner>/provider-netbox.
+#
+# - Push a tag like v0.1.0 to publish that version.
+# - Or run it manually from the Actions tab and enter a version.
+
 on:
+  push:
+    tags:
+      - "v*.*.*"
   workflow_dispatch:
     inputs:
       version:
-        description: "Version string to use while publishing the package (e.g. v1.0.0-alpha.1)"
-        default: ''
-        required: false
-      go-version:
-        description: 'Go version to use if building needs to be done'
-        default: '1.24'
-        required: false
+        description: "Version to publish (e.g. v0.1.0)"
+        required: true
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  DOCKER_BUILDX_VERSION: "v0.38.1"
 
 jobs:
-  publish-provider-package:
-    uses: crossplane-contrib/provider-workflows/.github/workflows/publish-provider.yml@451c4dc6ad3691b0a702a997a0ac24e8bbc8bbaa # main
-    with:
-      repository: provider-netbox
-      version: ${{ github.event.inputs.version }}
-      go-version: ${{ github.event.inputs.go-version }}
-      cleanup-disk: true
-    secrets:
-      GHCR_PAT: ${{ secrets.GITHUB_TOKEN }}
-      XPKG_MIRROR_TOKEN: ${{ secrets.XPKG_MIRROR_TOKEN }}
-      XPKG_MIRROR_ACCESS_ID: ${{ secrets.XPKG_MIRROR_ACCESS_ID }}
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@ceedf095f4ec1a097402bc6bd80831f2e1a6fde6 # v2.0.0
+        with:
+          android: true
+          dotnet: true
+          haskell: true
+          tool-cache: false
+          large-packages: false
+          swap-storage: false
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4
+        with:
+          platforms: all
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
+        with:
+          version: ${{ env.DOCKER_BUILDX_VERSION }}
+          install: true
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+
+      - name: Find the Go Build Cache
+        id: go
+        run: echo "cache=$(make go.cachedir)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache the Go Build Cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ steps.go.outputs.cache }}
+          key: ${{ runner.os }}-build-publish-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-build-publish-
+
+      - name: Cache Go Dependencies
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .work/pkg
+          key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-pkg-
+
+      - name: Determine version and registry
+        id: meta
+        env:
+          INPUT_VERSION: ${{ github.event.inputs.version }}
+        run: |
+          if [ -n "${INPUT_VERSION}" ]; then
+            version="${INPUT_VERSION}"
+          else
+            version="${GITHUB_REF_NAME}"
+          fi
+          [ -n "${version}" ] || { echo "Could not determine a version" >&2; exit 1; }
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "registry=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_OUTPUT"
+          echo "Publishing ${version} to ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/provider-netbox"
+
+      - name: Log in to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Vendor Dependencies
+        run: make vendor vendor.check
+
+      - name: Build Artifacts
+        run: make -j2 build.all
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          # buildx doesn't load built images by default; xpkg build needs them locally.
+          BUILD_ARGS: "--load"
+
+      - name: Publish Package
+        run: make publish
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+          XPKG_REG_ORGS: ${{ steps.meta.outputs.registry }}
+          XPKG_REG_ORGS_NO_PROMOTE: ${{ steps.meta.outputs.registry }}
+          # The build system only publishes from main/master/release-* branches;
+          # tag checkouts are detached, so tell it this is a release build.
+          BRANCH_NAME: main
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: provider-netbox-${{ steps.meta.outputs.version }}
+          path: _output/xpkg/**
