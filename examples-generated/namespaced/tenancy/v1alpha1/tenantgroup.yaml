@@ -1,0 +1,12 @@
+apiVersion: tenancy.netbox.m.crossplane.io/v1alpha1
+kind: TenantGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tenancy/v1alpha1/tenantgroup
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: test-tenant-group

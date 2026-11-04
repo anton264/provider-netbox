@@ -1,0 +1,15 @@
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualMachineInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualmachineinterface
+  labels:
+    testing.upbound.io/example-name: myvm_eth0
+  name: myvm-eth0
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: eth0
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: netbox_virtual_machine

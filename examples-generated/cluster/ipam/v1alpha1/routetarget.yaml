@@ -1,0 +1,29 @@
+apiVersion: ipam.netbox.crossplane.io/v1alpha1
+kind: RouteTarget
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/routetarget
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: my description
+    name: test
+    tenantIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: tenancy.netbox.crossplane.io/v1alpha1
+kind: Tenant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/routetarget
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: test

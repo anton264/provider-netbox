@@ -1,0 +1,50 @@
+apiVersion: tenancy.netbox.m.crossplane.io/v1alpha1
+kind: ContactAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tenancy/v1alpha1/contactassignment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    contactIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    contentType: dcim.device
+    objectId: 123
+    priority: primary
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: tenancy.netbox.m.crossplane.io/v1alpha1
+kind: Contact
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tenancy/v1alpha1/contactassignment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: test
+
+---
+
+apiVersion: tenancy.netbox.m.crossplane.io/v1alpha1
+kind: ContactRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tenancy/v1alpha1/contactassignment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: test

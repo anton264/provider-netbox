@@ -1,0 +1,14 @@
+apiVersion: extras.netbox.m.crossplane.io/v1alpha1
+kind: Webhook
+metadata:
+  annotations:
+    meta.upbound.io/example-id: extras/v1alpha1/webhook
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    bodytemplate: Sample body
+    name: test
+    payloadUrl: https://example.com/webhook

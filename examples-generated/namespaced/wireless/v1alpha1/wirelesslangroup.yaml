@@ -1,0 +1,12 @@
+apiVersion: wireless.netbox.m.crossplane.io/v1alpha1
+kind: WirelessLANGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wireless/v1alpha1/wirelesslangroup
+  labels:
+    testing.upbound.io/example-name: parent
+  name: parent
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: campus

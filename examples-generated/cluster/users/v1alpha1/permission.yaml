@@ -1,0 +1,44 @@
+apiVersion: users.netbox.crossplane.io/v1alpha1
+kind: Permission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: users/v1alpha1/permission
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    actions:
+    - add
+    - change
+    constraints: |-
+      ${jsonencode([{
+          "status" = "active"
+        }])}
+    description: my description
+    enabled: true
+    name: test
+    objectTypes:
+    - ipam.prefix
+    users:
+    - ${netbox_user.test.id}
+
+---
+
+apiVersion: users.netbox.crossplane.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: users/v1alpha1/permission
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    active: true
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    staff: true
+    username: johndoe

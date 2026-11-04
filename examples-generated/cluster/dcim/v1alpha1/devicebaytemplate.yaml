@@ -1,0 +1,48 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DeviceBayTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebaytemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example_device_bay_template
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DeviceType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebaytemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    model: example_device_model
+    partNumber: example_part_number
+    slug: example_device_slug
+    subdeviceRole: parent
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebaytemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example_manufacturer

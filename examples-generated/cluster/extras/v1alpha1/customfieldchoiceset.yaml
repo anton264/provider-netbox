@@ -1,0 +1,17 @@
+apiVersion: extras.netbox.crossplane.io/v1alpha1
+kind: CustomFieldChoiceSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: extras/v1alpha1/customfieldchoiceset
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: Description
+    extraChoices:
+    - - choice1
+      - label1
+    - - choice2
+      - choice2
+    name: my-custom-field-set

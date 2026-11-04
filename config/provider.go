@@ -5,14 +5,14 @@ import (
 	_ "embed"
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
-
-	nullCluster "github.com/crossplane/upjet-provider-template/config/cluster/null"
-	nullNamespaced "github.com/crossplane/upjet-provider-template/config/namespaced/null"
 )
 
 const (
-	resourcePrefix = "template"
-	modulePath     = "github.com/crossplane/upjet-provider-template"
+	resourcePrefix = "netbox"
+	modulePath     = "github.com/anton264/provider-netbox"
+
+	rootGroup           = "netbox.crossplane.io"
+	rootGroupNamespaced = "netbox.m.crossplane.io"
 )
 
 //go:embed schema.json
@@ -21,46 +21,39 @@ var providerSchema string
 //go:embed provider-metadata.yaml
 var providerMetadata string
 
-// GetProvider returns provider configuration
+// defaultResourceOptions are applied to every NetBox resource, in order.
+func defaultResourceOptions() ujconfig.ProviderOption {
+	return ujconfig.WithDefaultResourceOptions(
+		ExternalNameConfigurations(),
+		GroupKindOverrides(),
+		References(),
+	)
+}
+
+// GetProvider returns the cluster-scoped (Crossplane v1 style) provider configuration.
 func GetProvider() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
-		ujconfig.WithRootGroup("template.crossplane.io"),
+		ujconfig.WithRootGroup(rootGroup),
 		ujconfig.WithIncludeList(ExternalNameConfigured()),
 		ujconfig.WithFeaturesPackage("internal/features"),
-		ujconfig.WithDefaultResourceOptions(
-			ExternalNameConfigurations(),
-		))
-
-	for _, configure := range []func(provider *ujconfig.Provider){
-		// add custom config functions
-		nullCluster.Configure,
-	} {
-		configure(pc)
-	}
+		defaultResourceOptions(),
+	)
 
 	pc.ConfigureResources()
 	return pc
 }
 
-// GetProviderNamespaced returns the namespaced provider configuration
+// GetProviderNamespaced returns the namespaced (Crossplane v2 style) provider configuration.
 func GetProviderNamespaced() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
-		ujconfig.WithRootGroup("template.m.crossplane.io"),
+		ujconfig.WithRootGroup(rootGroupNamespaced),
 		ujconfig.WithIncludeList(ExternalNameConfigured()),
 		ujconfig.WithFeaturesPackage("internal/features"),
-		ujconfig.WithDefaultResourceOptions(
-			ExternalNameConfigurations(),
-		),
+		defaultResourceOptions(),
 		ujconfig.WithExampleManifestConfiguration(ujconfig.ExampleManifestConfiguration{
 			ManagedResourceNamespace: "crossplane-system",
-		}))
-
-	for _, configure := range []func(provider *ujconfig.Provider){
-		// add custom config functions
-		nullNamespaced.Configure,
-	} {
-		configure(pc)
-	}
+		}),
+	)
 
 	pc.ConfigureResources()
 	return pc

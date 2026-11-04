@@ -1,0 +1,63 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceFrontPort
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicefrontport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: front port 1
+    rearPortId: ${netbox_device_rear_port.test.id}
+    rearPortPosition: 2
+    type: 8p8c
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicefrontport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: '%[1]s'
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceRearPort
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicefrontport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    markConnected: true
+    name: rear port 1
+    positions: 2
+    type: 8p8c

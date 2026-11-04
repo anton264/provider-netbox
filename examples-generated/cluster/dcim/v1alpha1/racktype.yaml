@@ -1,0 +1,41 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: RackType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/racktype
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    comments: My comments
+    description: My description
+    formFactor: 2-post-frame
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    maxWeight: 20
+    model: mymodel
+    mountingDepthMm: 21
+    outerDepth: 15
+    outerUnit: mm
+    outerWidth: 10
+    startingUnit: 1
+    uHeight: 48
+    weight: 15
+    weightUnit: kg
+    width: 19
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/racktype
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: my-manufacturer

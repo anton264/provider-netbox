@@ -1,0 +1,71 @@
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualMachineInterfacePrimaryMACAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualmachineinterfaceprimarymacaddress
+  labels:
+    testing.upbound.io/example-name: myvm_primary_mac
+  name: myvm-primary-mac
+  namespace: crossplane-system
+spec:
+  forProvider:
+    interfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: myvm_eth0
+    macAddressIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: myvm_mac
+
+---
+
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualMachineInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualmachineinterfaceprimarymacaddress
+  labels:
+    testing.upbound.io/example-name: myvm_eth0
+  name: myvm-eth0
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: eth0
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: myvm
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: MACAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualmachineinterfaceprimarymacaddress
+  labels:
+    testing.upbound.io/example-name: myvm_mac
+  name: myvm-mac
+  namespace: crossplane-system
+spec:
+  forProvider:
+    macAddress: 00:10:FA:63:38:4A
+    virtualMachineInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: myvm_eth0
+
+---
+
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualmachineinterfaceprimarymacaddress
+  labels:
+    testing.upbound.io/example-name: myvm
+  name: myvm
+  namespace: crossplane-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vmw_cluster_01
+    name: myvm-1

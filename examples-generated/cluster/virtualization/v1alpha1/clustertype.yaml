@@ -1,0 +1,11 @@
+apiVersion: virtualization.netbox.crossplane.io/v1alpha1
+kind: ClusterType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/clustertype
+  labels:
+    testing.upbound.io/example-name: vmw_vsphere
+  name: vmw-vsphere
+spec:
+  forProvider:
+    name: VMware vSphere 6

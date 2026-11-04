@@ -1,0 +1,17 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: FHRPGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/fhrpgroup
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    authKey: SuperSecretKey
+    authType: md5
+    description: This is a test group
+    groupId: 1234
+    name: test-fhrp-group
+    protocol: vrrp

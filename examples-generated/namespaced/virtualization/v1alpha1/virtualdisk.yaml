@@ -1,0 +1,35 @@
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualdisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: Main disk
+    name: disk-01
+    sizeMb: 50
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: base_vm
+
+---
+
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualdisk
+  labels:
+    testing.upbound.io/example-name: base_vm
+  name: base-vm
+  namespace: crossplane-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: netbox_cluster
+    name: myvm-1

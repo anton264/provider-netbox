@@ -1,0 +1,13 @@
+apiVersion: extras.netbox.m.crossplane.io/v1alpha1
+kind: ConfigContext
+metadata:
+  annotations:
+    meta.upbound.io/example-id: extras/v1alpha1/configcontext
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    data: ${jsonencode({ "testkey" = "testval" })}
+    name: '%s'

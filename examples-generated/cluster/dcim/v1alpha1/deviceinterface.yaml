@@ -1,0 +1,15 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DeviceInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceinterface
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: testinterface
+    type: 1000base-t

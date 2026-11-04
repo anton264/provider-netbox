@@ -1,0 +1,40 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DeviceRearPort
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicerearport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    markConnected: true
+    name: rear port 1
+    positions: 2
+    type: 8p8c
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicerearport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: '%[1]s'
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test

@@ -1,0 +1,12 @@
+apiVersion: ipam.netbox.crossplane.io/v1alpha1
+kind: RIR
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/rir
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: my description
+    name: test

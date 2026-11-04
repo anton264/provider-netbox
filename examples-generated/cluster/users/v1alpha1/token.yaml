@@ -1,0 +1,39 @@
+apiVersion: users.netbox.crossplane.io/v1alpha1
+kind: Token
+metadata:
+  annotations:
+    meta.upbound.io/example-id: users/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: test_basic
+  name: test-basic
+spec:
+  forProvider:
+    allowedIps:
+    - 2.4.8.16/32
+    expires: "2036-01-02T15:04:05.000Z"
+    keySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    writeEnabled: false
+
+---
+
+apiVersion: users.netbox.crossplane.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: users/v1alpha1/token
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    username: johndoe

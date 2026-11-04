@@ -1,0 +1,34 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: IPAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/ipaddress
+  labels:
+    testing.upbound.io/example-name: this
+  name: this
+  namespace: crossplane-system
+spec:
+  forProvider:
+    ipAddress: 10.0.0.60/24
+    status: active
+    virtualMachineInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: this
+
+---
+
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualMachineInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/ipaddress
+  labels:
+    testing.upbound.io/example-name: this
+  name: this
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: eth0
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

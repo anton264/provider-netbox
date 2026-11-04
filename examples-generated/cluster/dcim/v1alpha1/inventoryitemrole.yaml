@@ -1,0 +1,59 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: InventoryItemRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/inventoryitemrole
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    colorHex: "123456"
+    name: Role 1
+    slug: role-1-slug
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/inventoryitemrole
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: '%[1]s'
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    tenantIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: InventoryItem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/inventoryitemrole
+  labels:
+    testing.upbound.io/example-name: parent
+  name: parent
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: Inventory Item 1
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test

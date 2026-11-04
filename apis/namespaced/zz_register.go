@@ -10,17 +10,33 @@ package namespaced
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/crossplane/upjet-provider-template/apis/namespaced/null/v1alpha1"
-	v1alpha1namespaced "github.com/crossplane/upjet-provider-template/apis/namespaced/v1alpha1"
-	v1beta1 "github.com/crossplane/upjet-provider-template/apis/namespaced/v1beta1"
+	v1alpha1 "github.com/anton264/provider-netbox/apis/namespaced/circuits/v1alpha1"
+	v1alpha1dcim "github.com/anton264/provider-netbox/apis/namespaced/dcim/v1alpha1"
+	v1alpha1extras "github.com/anton264/provider-netbox/apis/namespaced/extras/v1alpha1"
+	v1alpha1ipam "github.com/anton264/provider-netbox/apis/namespaced/ipam/v1alpha1"
+	v1alpha1tenancy "github.com/anton264/provider-netbox/apis/namespaced/tenancy/v1alpha1"
+	v1alpha1users "github.com/anton264/provider-netbox/apis/namespaced/users/v1alpha1"
+	v1alpha1namespaced "github.com/anton264/provider-netbox/apis/namespaced/v1alpha1"
+	v1beta1 "github.com/anton264/provider-netbox/apis/namespaced/v1beta1"
+	v1alpha1virtualization "github.com/anton264/provider-netbox/apis/namespaced/virtualization/v1alpha1"
+	v1alpha1vpn "github.com/anton264/provider-netbox/apis/namespaced/vpn/v1alpha1"
+	v1alpha1wireless "github.com/anton264/provider-netbox/apis/namespaced/wireless/v1alpha1"
 )
 
 func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1dcim.SchemeBuilder.AddToScheme,
+		v1alpha1extras.SchemeBuilder.AddToScheme,
+		v1alpha1ipam.SchemeBuilder.AddToScheme,
+		v1alpha1tenancy.SchemeBuilder.AddToScheme,
+		v1alpha1users.SchemeBuilder.AddToScheme,
 		v1alpha1namespaced.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
+		v1alpha1virtualization.SchemeBuilder.AddToScheme,
+		v1alpha1vpn.SchemeBuilder.AddToScheme,
+		v1alpha1wireless.SchemeBuilder.AddToScheme,
 	)
 }
 

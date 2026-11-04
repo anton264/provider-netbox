@@ -1,0 +1,97 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Module
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/module
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: SFP card
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    moduleBayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    moduleTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    status: active
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/module
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: '%[1]s'
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceModuleBay
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/module
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: SFP
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/module
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: Dell
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: ModuleType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/module
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    model: Networking

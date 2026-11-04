@@ -1,0 +1,40 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DeviceConsoleServerPort
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceconsoleserverport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    markConnected: true
+    name: console server port
+    speed: 1200
+    type: de-9
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceconsoleserverport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: '%[1]s'
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test

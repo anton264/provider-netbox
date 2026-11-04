@@ -1,0 +1,49 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: ModuleBayTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/modulebaytemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    label: SFP28 cage
+    name: TwentyFiveGigE1/0/1
+    position: TwentyFiveGigE1/0/1
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DeviceType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/modulebaytemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    model: Catalyst 9300X-24Y
+    partNumber: C9300X-24Y
+    slug: catalyst-9300x-24y
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/modulebaytemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: Cisco

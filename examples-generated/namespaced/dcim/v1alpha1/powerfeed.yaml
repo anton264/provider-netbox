@@ -1,0 +1,77 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: PowerFeed
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/powerfeed
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    amperage: 100
+    maxPercentUtilization: 80
+    name: Power Feed 1
+    phase: single-phase
+    powerPanelIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    status: active
+    supply: ac
+    type: primary
+    voltage: 250
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Location
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/powerfeed
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: Location 1
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: PowerPanel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/powerfeed
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    locationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: Power Panel 1
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Site
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/powerfeed
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: Site 1
+    status: active

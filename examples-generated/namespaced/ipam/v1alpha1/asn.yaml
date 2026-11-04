@@ -1,0 +1,32 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: ASN
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/asn
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    asn: 1337
+    comments: test
+    description: test
+    rirIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: RIR
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/asn
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: testrir

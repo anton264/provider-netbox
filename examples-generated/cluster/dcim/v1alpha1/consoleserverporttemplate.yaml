@@ -1,0 +1,50 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: ConsoleServerPortTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/consoleserverporttemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: Console server port 1
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    label: Port 1
+    name: port1
+    type: rj-45
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DeviceType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/consoleserverporttemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    model: CM8148
+    partNumber: CM8148
+    slug: cm8148
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/consoleserverporttemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: Opengear

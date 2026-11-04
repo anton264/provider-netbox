@@ -1,0 +1,17 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Site
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/site
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+spec:
+  forProvider:
+    asn: 1337
+    facility: Data center
+    latitude: "-45.4085"
+    longitude: "30.1496"
+    name: Example site 1
+    status: staging
+    timezone: Africa/Johannesburg

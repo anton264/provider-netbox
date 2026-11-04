@@ -1,0 +1,17 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: FHRPGroupAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/fhrpgroupassignment
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    groupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: netbox_fhrp_group
+    interfaceId: ${data.netbox_device_interfaces.interfaces[0].id}
+    interfaceType: dcim.interface
+    priority: 150

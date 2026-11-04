@@ -1,0 +1,14 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: VirtualChassis
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/virtualchassis
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: virtual chassis
+    domain: domain
+    name: chassis

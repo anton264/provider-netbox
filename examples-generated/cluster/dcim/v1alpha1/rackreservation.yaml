@@ -1,0 +1,58 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: RackReservation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/rackreservation
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: my description
+    rackIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    units:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Rack
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/rackreservation
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    status: active
+    uHeight: 40
+    width: 10
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Site
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/rackreservation
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: test
+    status: active

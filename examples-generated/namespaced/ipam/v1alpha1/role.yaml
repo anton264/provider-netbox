@@ -1,0 +1,12 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/role
+  labels:
+    testing.upbound.io/example-name: test_basic
+  name: test-basic
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: test

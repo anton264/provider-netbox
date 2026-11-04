@@ -1,0 +1,12 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: SiteGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/sitegroup
+  labels:
+    testing.upbound.io/example-name: parent
+  name: parent
+spec:
+  forProvider:
+    description: sample description
+    name: parent

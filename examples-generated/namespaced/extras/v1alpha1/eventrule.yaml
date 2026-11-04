@@ -1,0 +1,41 @@
+apiVersion: extras.netbox.m.crossplane.io/v1alpha1
+kind: EventRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: extras/v1alpha1/eventrule
+  labels:
+    testing.upbound.io/example-name: webhook
+  name: webhook
+  namespace: crossplane-system
+spec:
+  forProvider:
+    actionObjectId: ${netbox_webhook.test.id}
+    actionType: webhook
+    contentTypes:
+    - dcim.site
+    - virtualization.cluster
+    eventTypes:
+    - object_created
+    - object_updated
+    - object_deleted
+    - job_started
+    - job_completed
+    - job_failed
+    - job_errored
+    name: my-event-rule
+
+---
+
+apiVersion: extras.netbox.m.crossplane.io/v1alpha1
+kind: Webhook
+metadata:
+  annotations:
+    meta.upbound.io/example-id: extras/v1alpha1/eventrule
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: my-webhook
+    payloadUrl: https://example.com/webhook

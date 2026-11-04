@@ -1,0 +1,30 @@
+# A tenant and a site that references it by managed resource name instead of
+# by NetBox ID.
+apiVersion: tenancy.netbox.m.crossplane.io/v1alpha1
+kind: Tenant
+metadata:
+  name: example-tenant
+  namespace: default
+spec:
+  forProvider:
+    name: Example Tenant
+    slug: example-tenant
+  providerConfigRef:
+    kind: ClusterProviderConfig
+    name: default
+---
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Site
+metadata:
+  name: example-site
+  namespace: default
+spec:
+  forProvider:
+    name: Example Site
+    slug: example-site
+    status: active
+    tenantIdRef:
+      name: example-tenant
+  providerConfigRef:
+    kind: ClusterProviderConfig
+    name: default

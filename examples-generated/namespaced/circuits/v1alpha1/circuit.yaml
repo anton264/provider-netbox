@@ -1,0 +1,64 @@
+apiVersion: circuits.netbox.m.crossplane.io/v1alpha1
+kind: Circuit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: circuits/v1alpha1/circuit
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    cid: test
+    providerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    status: active
+    typeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: circuits.netbox.m.crossplane.io/v1alpha1
+kind: CircuitProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: circuits/v1alpha1/circuit
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: test
+
+---
+
+apiVersion: circuits.netbox.m.crossplane.io/v1alpha1
+kind: CircuitType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: circuits/v1alpha1/circuit
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: test
+
+---
+
+apiVersion: tenancy.netbox.m.crossplane.io/v1alpha1
+kind: Tenant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: circuits/v1alpha1/circuit
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: test

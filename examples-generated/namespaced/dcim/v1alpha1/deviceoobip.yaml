@@ -1,0 +1,60 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceOOBIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceoobip
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    ipAddressIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: oob
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceoobip
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: '%[1]s'
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: IPAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceoobip
+  labels:
+    testing.upbound.io/example-name: oob
+  name: oob
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    ipAddress: 10.0.0.5/24
+    status: active

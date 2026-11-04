@@ -1,0 +1,31 @@
+apiVersion: virtualization.netbox.crossplane.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: vmw_cluster_01
+  name: vmw-cluster-01
+spec:
+  forProvider:
+    clusterGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: netbox_cluster_group
+    clusterTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vmw_vsphere
+    name: vmw-cluster-01
+
+---
+
+apiVersion: virtualization.netbox.crossplane.io/v1alpha1
+kind: ClusterType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: vmw_vsphere
+  name: vmw-vsphere
+spec:
+  forProvider:
+    name: VMware vSphere 6

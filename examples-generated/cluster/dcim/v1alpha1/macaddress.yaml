@@ -1,0 +1,31 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: MACAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/macaddress
+  labels:
+    testing.upbound.io/example-name: this
+  name: this
+spec:
+  forProvider:
+    macAddress: 00:1A:2B:3C:4D:5E
+    virtualMachineInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: this
+
+---
+
+apiVersion: virtualization.netbox.crossplane.io/v1alpha1
+kind: VirtualMachineInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/macaddress
+  labels:
+    testing.upbound.io/example-name: this
+  name: this
+spec:
+  forProvider:
+    name: eth0
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

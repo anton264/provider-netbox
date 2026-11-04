@@ -1,0 +1,54 @@
+apiVersion: vpn.netbox.m.crossplane.io/v1alpha1
+kind: TunnelTermination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpn/v1alpha1/tunneltermination
+  labels:
+    testing.upbound.io/example-name: device
+  name: device
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    role: peer
+    tunnelIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: vpn.netbox.m.crossplane.io/v1alpha1
+kind: Tunnel
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpn/v1alpha1/tunneltermination
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    encapsulation: ipsec-transport
+    name: my-tunnel
+    status: active
+    tunnelGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: vpn.netbox.m.crossplane.io/v1alpha1
+kind: TunnelGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpn/v1alpha1/tunneltermination
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: description
+    name: my-tunnel-group

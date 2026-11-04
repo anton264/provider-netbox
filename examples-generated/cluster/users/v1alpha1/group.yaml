@@ -1,0 +1,11 @@
+apiVersion: users.netbox.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: users/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: test-group

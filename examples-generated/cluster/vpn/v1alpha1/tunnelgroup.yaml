@@ -1,0 +1,12 @@
+apiVersion: vpn.netbox.crossplane.io/v1alpha1
+kind: TunnelGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpn/v1alpha1/tunnelgroup
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    description: My description
+    name: my-tunnel-group

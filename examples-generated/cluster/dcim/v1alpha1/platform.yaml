@@ -1,0 +1,11 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Platform
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/platform
+  labels:
+    testing.upbound.io/example-name: PANOS
+  name: panos
+spec:
+  forProvider:
+    name: PANOS

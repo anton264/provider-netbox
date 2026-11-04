@@ -1,0 +1,30 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: ModuleType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/moduletype
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    model: Networking
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/moduletype
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: Dell

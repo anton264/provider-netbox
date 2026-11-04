@@ -1,4 +1,4 @@
-module github.com/crossplane/upjet-provider-template
+module github.com/anton264/provider-netbox
 
 go 1.27.3
 

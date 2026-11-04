@@ -1,0 +1,12 @@
+apiVersion: wireless.netbox.crossplane.io/v1alpha1
+kind: WirelessLAN
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wireless/v1alpha1/wirelesslan
+  labels:
+    testing.upbound.io/example-name: guest
+  name: guest
+spec:
+  forProvider:
+    ssid: guest-wifi
+    status: active

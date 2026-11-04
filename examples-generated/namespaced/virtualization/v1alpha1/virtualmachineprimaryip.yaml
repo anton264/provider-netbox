@@ -1,0 +1,52 @@
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualMachinePrimaryIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualmachineprimaryip
+  labels:
+    testing.upbound.io/example-name: myvm_primary_ip
+  name: myvm-primary-ip
+  namespace: crossplane-system
+spec:
+  forProvider:
+    ipAddressIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: myvm_ip
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: netbox_virtual_machine
+
+---
+
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: VirtualMachineInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualmachineprimaryip
+  labels:
+    testing.upbound.io/example-name: myvm_eth0
+  name: myvm-eth0
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: eth0
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: netbox_virtual_machine
+
+---
+
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: IPAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/virtualmachineprimaryip
+  labels:
+    testing.upbound.io/example-name: myvm_ip
+  name: myvm-ip
+  namespace: crossplane-system
+spec:
+  forProvider:
+    interfaceId: ${netbox_interface.myvm_eth0.id}
+    ipAddress: 10.0.0.60/24
+    status: active

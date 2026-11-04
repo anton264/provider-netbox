@@ -1,0 +1,14 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicerole
+  labels:
+    testing.upbound.io/example-name: core_sw
+  name: core-sw
+  namespace: crossplane-system
+spec:
+  forProvider:
+    colorHex: ff00ff
+    name: core-sw
+    vmRole: false

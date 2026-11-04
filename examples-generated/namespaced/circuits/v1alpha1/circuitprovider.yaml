@@ -1,0 +1,12 @@
+apiVersion: circuits.netbox.m.crossplane.io/v1alpha1
+kind: CircuitProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: circuits/v1alpha1/circuitprovider
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: test

@@ -1,0 +1,13 @@
+apiVersion: virtualization.netbox.m.crossplane.io/v1alpha1
+kind: ClusterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualization/v1alpha1/clustergroup
+  labels:
+    testing.upbound.io/example-name: dc_west
+  name: dc-west
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: West Datacenter Cluster
+    name: dc-west

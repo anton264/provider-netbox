@@ -1,0 +1,16 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: IPRange
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/iprange
+  labels:
+    testing.upbound.io/example-name: cust_a_prod
+  name: cust-a-prod
+  namespace: crossplane-system
+spec:
+  forProvider:
+    endAddress: 10.0.0.50/24
+    startAddress: 10.0.0.1/24
+    tags:
+    - customer-a
+    - prod

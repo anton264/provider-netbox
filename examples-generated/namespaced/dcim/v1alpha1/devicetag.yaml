@@ -1,0 +1,30 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceTag
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicetag
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tag: DMZ
+
+---
+
+apiVersion: extras.netbox.m.crossplane.io/v1alpha1
+kind: Tag
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicetag
+  labels:
+    testing.upbound.io/example-name: managed_by_terraform
+  name: managed-by-terraform
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: managed-by-terraform

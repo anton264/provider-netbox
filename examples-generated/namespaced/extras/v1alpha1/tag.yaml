@@ -1,0 +1,13 @@
+apiVersion: extras.netbox.m.crossplane.io/v1alpha1
+kind: Tag
+metadata:
+  annotations:
+    meta.upbound.io/example-id: extras/v1alpha1/tag
+  labels:
+    testing.upbound.io/example-name: dmz
+  name: dmz
+  namespace: crossplane-system
+spec:
+  forProvider:
+    colorHex: ff00ff
+    name: DMZ

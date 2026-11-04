@@ -1,0 +1,14 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: Prefix
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/prefix
+  labels:
+    testing.upbound.io/example-name: my_prefix
+  name: my-prefix
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: test prefix
+    prefix: 10.0.0.0/24
+    status: active

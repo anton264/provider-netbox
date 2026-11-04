@@ -1,0 +1,39 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceModuleBay
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicemodulebay
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: module bay 1
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicemodulebay
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: '%[1]s'
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test

@@ -1,0 +1,14 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: AvailableIPAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/availableipaddress
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    prefixIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: netbox_prefix

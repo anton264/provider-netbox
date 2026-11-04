@@ -1,0 +1,175 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceBay
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: example_description
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    installedDeviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_installed
+    label: example_label
+    name: example_device_bay
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example_device
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example_installed
+  name: example-installed
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_installed
+    name: example_device_installed
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    colorHex: "123456"
+    name: example_role
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    model: example_device_type
+    subdeviceRole: parent
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example_installed
+  name: example-installed
+  namespace: crossplane-system
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    model: example_device_type_installed
+    subdeviceRole: child
+    uHeight: 0
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: example_manufacturer
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Site
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: example_site
+    status: active
+
+---
+
+apiVersion: tenancy.netbox.m.crossplane.io/v1alpha1
+kind: Tenant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicebay
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: example_tenant

@@ -1,0 +1,18 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/service
+  labels:
+    testing.upbound.io/example-name: ssh
+  name: ssh
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: ssh
+    ports:
+    - 22
+    protocol: tcp
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: netbox_virtual_machine

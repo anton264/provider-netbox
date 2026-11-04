@@ -1,0 +1,78 @@
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceInterfacePrimaryMACAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceinterfaceprimarymacaddress
+  labels:
+    testing.upbound.io/example-name: mydevice_primary_mac
+  name: mydevice-primary-mac
+  namespace: crossplane-system
+spec:
+  forProvider:
+    interfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mydevice_eth0
+    macAddressIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mydevice_mac
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceinterfaceprimarymacaddress
+  labels:
+    testing.upbound.io/example-name: mydevice
+  name: mydevice
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: mydevice
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: DeviceInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceinterfaceprimarymacaddress
+  labels:
+    testing.upbound.io/example-name: mydevice_eth0
+  name: mydevice-eth0
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mydevice
+    name: eth0
+    type: 1000base-t
+
+---
+
+apiVersion: dcim.netbox.m.crossplane.io/v1alpha1
+kind: MACAddress
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/deviceinterfaceprimarymacaddress
+  labels:
+    testing.upbound.io/example-name: mydevice_mac
+  name: mydevice-mac
+  namespace: crossplane-system
+spec:
+  forProvider:
+    deviceInterfaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mydevice_eth0
+    macAddress: 00:1A:2B:3C:4D:5E

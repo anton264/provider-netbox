@@ -1,0 +1,50 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: RearPortTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/rearporttemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    colorHex: f44336
+    label: MTP-12 trunk port
+    moduleTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: MTP-1
+    positions: 12
+    type: mpo
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/rearporttemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: FS.COM
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: ModuleType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/rearporttemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    model: FHD MTP-12 OM4 Cassette
+    partNumber: FHD-MTP12-OM4-LC12

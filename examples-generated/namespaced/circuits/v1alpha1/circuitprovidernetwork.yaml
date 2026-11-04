@@ -1,0 +1,31 @@
+apiVersion: circuits.netbox.m.crossplane.io/v1alpha1
+kind: CircuitProviderNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: circuits/v1alpha1/circuitprovidernetwork
+  labels:
+    testing.upbound.io/example-name: networka
+  name: networka
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: NetworkA
+    providerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: providera
+
+---
+
+apiVersion: circuits.netbox.m.crossplane.io/v1alpha1
+kind: CircuitProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: circuits/v1alpha1/circuitprovidernetwork
+  labels:
+    testing.upbound.io/example-name: providera
+  name: providera
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: ProviderA
+    slug: providera

@@ -1,0 +1,17 @@
+apiVersion: users.netbox.m.crossplane.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: users/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+  namespace: crossplane-system
+spec:
+  forProvider:
+    active: true
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    staff: true
+    username: johndoe

@@ -1,0 +1,11 @@
+apiVersion: tenancy.netbox.crossplane.io/v1alpha1
+kind: ContactGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tenancy/v1alpha1/contactgroup
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: test

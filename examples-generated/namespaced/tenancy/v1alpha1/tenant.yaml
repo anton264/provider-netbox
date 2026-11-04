@@ -1,0 +1,12 @@
+apiVersion: tenancy.netbox.m.crossplane.io/v1alpha1
+kind: Tenant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tenancy/v1alpha1/tenant
+  labels:
+    testing.upbound.io/example-name: customer_a
+  name: customer-a
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: Customer A

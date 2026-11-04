@@ -1,0 +1,26 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Cable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/cable
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    aTermination:
+    - objectId: ${netbox_device_console_server_port.kvm1.id}
+      objectType: dcim.consoleserverport
+    - objectId: ${netbox_device_console_server_port.kvm2.id}
+      objectType: dcim.consoleserverport
+    bTermination:
+    - objectId: ${netbox_device_console_port.server1.id}
+      objectType: dcim.consoleport
+    - objectId: ${netbox_device_console_port.server2.id}
+      objectType: dcim.consoleport
+    colorHex: "123456"
+    label: KVM cable
+    length: 10
+    lengthUnit: m
+    status: connected
+    type: cat8

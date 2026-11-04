@@ -1,0 +1,69 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: PowerOutletTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/poweroutlettemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    feedLeg: A
+    label: C13/C19 combo outlet 01
+    name: outlet-01
+    powerPortId: ${netbox_power_port_template.test.id}
+    type: iec-60320-c13
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DeviceType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/poweroutlettemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    manufacturerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    model: APDU11150ME
+    partNumber: APDU11150ME
+    slug: apdu11150me
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Manufacturer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/poweroutlettemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    name: APC
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: PowerPortTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/poweroutlettemplate
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: inlet
+    type: iec-60309-p-n-e-6h

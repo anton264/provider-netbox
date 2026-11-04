@@ -1,0 +1,14 @@
+apiVersion: ipam.netbox.crossplane.io/v1alpha1
+kind: VRF
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/vrf
+  labels:
+    testing.upbound.io/example-name: cust_a_prod
+  name: cust-a-prod
+spec:
+  forProvider:
+    name: cust-a-prod
+    tags:
+    - customer-a
+    - prod

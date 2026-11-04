@@ -1,0 +1,14 @@
+apiVersion: ipam.netbox.m.crossplane.io/v1alpha1
+kind: VLAN
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ipam/v1alpha1/vlan
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: VLAN 1
+    tags: []
+    vid: 1777

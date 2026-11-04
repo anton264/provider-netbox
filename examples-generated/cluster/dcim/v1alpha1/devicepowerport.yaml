@@ -1,0 +1,40 @@
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: DevicePowerPort
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicepowerport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    allocatedDraw: 500
+    deviceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    maximumDraw: 750
+    name: power port
+    type: iec-60320-c6
+
+---
+
+apiVersion: dcim.netbox.crossplane.io/v1alpha1
+kind: Device
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dcim/v1alpha1/devicepowerport
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceTypeIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    name: '%[1]s'
+    roleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test

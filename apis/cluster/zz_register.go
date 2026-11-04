@@ -10,17 +10,33 @@ package cluster
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/crossplane/upjet-provider-template/apis/cluster/null/v1alpha1"
-	v1alpha1cluster "github.com/crossplane/upjet-provider-template/apis/cluster/v1alpha1"
-	v1beta1 "github.com/crossplane/upjet-provider-template/apis/cluster/v1beta1"
+	v1alpha1 "github.com/anton264/provider-netbox/apis/cluster/circuits/v1alpha1"
+	v1alpha1dcim "github.com/anton264/provider-netbox/apis/cluster/dcim/v1alpha1"
+	v1alpha1extras "github.com/anton264/provider-netbox/apis/cluster/extras/v1alpha1"
+	v1alpha1ipam "github.com/anton264/provider-netbox/apis/cluster/ipam/v1alpha1"
+	v1alpha1tenancy "github.com/anton264/provider-netbox/apis/cluster/tenancy/v1alpha1"
+	v1alpha1users "github.com/anton264/provider-netbox/apis/cluster/users/v1alpha1"
+	v1alpha1cluster "github.com/anton264/provider-netbox/apis/cluster/v1alpha1"
+	v1beta1 "github.com/anton264/provider-netbox/apis/cluster/v1beta1"
+	v1alpha1virtualization "github.com/anton264/provider-netbox/apis/cluster/virtualization/v1alpha1"
+	v1alpha1vpn "github.com/anton264/provider-netbox/apis/cluster/vpn/v1alpha1"
+	v1alpha1wireless "github.com/anton264/provider-netbox/apis/cluster/wireless/v1alpha1"
 )
 
 func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1dcim.SchemeBuilder.AddToScheme,
+		v1alpha1extras.SchemeBuilder.AddToScheme,
+		v1alpha1ipam.SchemeBuilder.AddToScheme,
+		v1alpha1tenancy.SchemeBuilder.AddToScheme,
+		v1alpha1users.SchemeBuilder.AddToScheme,
 		v1alpha1cluster.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
+		v1alpha1virtualization.SchemeBuilder.AddToScheme,
+		v1alpha1vpn.SchemeBuilder.AddToScheme,
+		v1alpha1wireless.SchemeBuilder.AddToScheme,
 	)
 }
 
